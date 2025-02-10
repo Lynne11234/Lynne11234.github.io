@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vietnamese Recipes</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: url(https://indieground.net/wp-content/uploads/2018/05/Freebie-FoldedPaperTextures-Preview-04.jpg);
+            color: rgb(84, 75, 75);
+            header {
+            background: #842d2d;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        header {
+            background: #3d2f2c;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        header h1 {
+            font-size: 3em;
+            margin: 0;
+        }
+        .menu-container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #fff;
+            border: 2px solid #b33939;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            margin-left: 20px;
+            margin-right: 20px;
+        }
+        .menu-section {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        .menu-column {
+            flex: 1;
+            min-width: 280px;
+            margin: 10px;
+            position: relative;
+        }
+        .menu-column h2 {
+            font-size: 1.8em;
+            color: #b33939;
+            border-bottom: 2px solid #b33939;
+            padding-bottom: 5px;
+            margin-bottom: 10px;
+        }
+        .menu-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            position: relative;
+        }
+        .menu-item p {
+            margin: 0;
+            cursor: pointer;
+        }
+        .menu-item span {
+            font-weight: bold;
+            color: #555;
+        }
+        .menu-item img {
+            position: absolute;
+            top: 50%;
+            left: 100%;
+            transform: translateY(-50%) scale(0);
+            width: 200px;
+            height: auto;
+            border: 2px solid #ffffff;
+            border-radius: 10px;
+            transition: transform 0.3s ease-in-out;
+            z-index: 10;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        .menu-item p:hover + img {
+            transform: translateY(-50%) translateX(-70%) scale(0.5);
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #a52e2e;
+            color: white;
+            font-size: 0.8em;
+        }
+        footer p {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Vietnamese Food</h1>
+    </header>
+    <div class="menu-container">
+        <div class="menu-section">
+            <div class="menu-column">
+                <h2>Pho/Bun</h2>
+                <div class="menu-item">
+                    <p>Chicken Pho</p>
+                    <img src="https://delightfulplate.com/wp-content/uploads/2019/04/Pho-Ga-Hanoi-Vietnamese-Chicken-Noodle-Soup.jpg" alt="Pho Ga">
+                    <span>$9.99</span>
+                </div>
+                <div class="menu-item">
+                    <p>Beef Pho</p>
+                    <img src="https://whattocooktoday.com/wp-content/uploads/2010/11/instant-pot-pho-bo-1-1.jpg" alt="Bruschetta">
+                    <span>$6.99</span>
+                </div>
+                <div class="menu-item">
+                    <p>Stuffed Mushrooms</p>
+                    <img src="images/stuffed-mushrooms.jpg" alt="Stuffed Mushrooms">
+                    <span>$7.99</span>
+                </div>
+            </div>
+            <div class="menu-column">
+                <h2>Soups</h2>
+                <div class="menu-item">
+                    <p>Tomato Basil Soup</p>
+                    <img src="images/tomato-basil-soup.jpg" alt="Tomato Basil Soup">
+                    <span>$5.99</span>
+                </div>
+                <div class="menu-item">
+                    <p>Chicken Noodle Soup</p>
+                    <img src="images/chicken-noodle-soup.jpg" alt="Chicken Noodle Soup">
+                    <span>$6.99</span>
+                </div>
+                <div class="menu-item">
+                    <p>French Onion Soup</p>
+                    <img src="images/french-onion-soup.jpg" alt="French Onion Soup">
+                    <span>$7.99</span>
+                </div>
+            </div>
+            <div class="menu-column">
+                <h2>Main Courses</h2>
+                <div class="menu-item">
+                    <p>Grilled Salmon</p>
+                    <img src="images/grilled-salmon.jpg" alt="Grilled Salmon">
+                    <span>$15.99</span>
+                </div>
+                <div class="menu-item">
+                    <p>Spaghetti Carbonara</p>
+                    <img src="images/spaghetti-carbonara.jpg" alt="Spaghetti Carbonara">
+                    <span>$12.99</span>
+                </div>
+                <div class="menu-item">
+                    <p>Chicken Parmesan</p>
+                    <img src="images/chicken-parmesan.jpg" alt="Chicken Parmesan">
+                    <span>$14.99</span>
+                </div>
+            </div>
+        </div>
+        <div class="menu-section">
+            <div class="menu-column">
+                <h2>Desserts</h2>
+                <div class="menu-item">
+                    <p>Chocolate Lava Cake</p>
+                    <img src="images/chocolate-lava-cake.jpg" alt="Chocolate Lava Cake">
+                    <span>$7.99</span>
+                </div>
+                <div class="menu-item">
+                    <p>Tiramisu</p>
+                    <img src="images/tiramisu.jpg" alt="Tiramisu">
+                    <span>$6.99</span>
+                </div>
+                <div class="menu-item">
+                    <p>Cheesecake</p>
+                    <img src="images/cheesecake.jpg" alt="Cheesecake">
+                    <span>$6.99</span>
+                </div>
+            </div>
+            <div class="menu-column">
+                <h2>Beverages</h2>
+                <div class="menu-item">
+                    <p>Coffee</p>
+                    <img src="images/coffee.jpg" alt="Coffee">
+                    <span>$2.99</span>
+                </div>
+                <div class="menu-item">
+                    <p>Fresh Lemonade</p>
+                    <img src="images/fresh-lemonade.jpg" alt="Fresh Lemonade">
+                    <span>$3.99</span>
+                </div>
+                <div class="menu-item">
+                    <p>Herbal Tea</p>
+                    <img src="images/herbal-tea.jpg" alt="Herbal Tea">
+                    <span>$2.99</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <p>&copy; 2025 Our Restaurant. All rights reserved.</p>
+    </footer>
+</body>
+</html>
