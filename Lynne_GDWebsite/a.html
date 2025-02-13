@@ -136,18 +136,26 @@
     <div class="white-box" id="whiteBox"></div>
     <button class="reset-button" id="resetButton">Too much numbers!!</button>
     <a href="pho.html" class="pho-link">But hey, where is Pho?</a>
-
+    <audio id="mouseHoldSound" src="mousehold.m4a"></audio>
+    <audio id="mouseReleaseSound" src="mouserelease.m4a"></audio>
+    <audio id="resetSound" src="reset.m4a"></audio>
     <script>
         const greyCircle = document.getElementById('greyCircle');
         const whiteBox = document.getElementById('whiteBox');
-      const MAX_HEIGHT = 400; // Max height 400px for 5 full spins
-     const HEIGHT_PER_SPIN = MAX_HEIGHT / 5; // 80px per spin
+        const resetButton = document.getElementById('resetButton');
+        const mouseHoldSound = document.getElementById('mouseHoldSound');
+        const mouseReleaseSound = document.getElementById('mouseReleaseSound');
+        const resetSound = document.getElementById('resetSound');
+        resetSound.volume = 0.6; // Set volume to 60%
+        const MAX_HEIGHT = 400; // Max height 400px for 5 full spins
+        const HEIGHT_PER_SPIN = MAX_HEIGHT / 5; // 80px per spin
 
         let rotation = 0;
         let initialAngle = 0;
         let fullSpins = 0;
 
         greyCircle.addEventListener('mousedown', (event) => {
+            mouseHoldSound.play();
             const rect = greyCircle.getBoundingClientRect();
             const centerX = rect.left + rect.width / 2;
             const centerY = rect.top + rect.height / 2;
@@ -188,6 +196,9 @@
             };
 
             const onMouseUp = () => {
+                mouseHoldSound.pause();
+                mouseHoldSound.currentTime = 0;
+                mouseReleaseSound.play();
                 document.removeEventListener('mousemove', onMouseMove);
                 document.removeEventListener('mouseup', onMouseUp);
             };
@@ -197,12 +208,13 @@
         });
 
         resetButton.addEventListener('click', () => {
+            resetSound.play();
             rotation = 0;
             fullSpins = 0;
             whiteBox.style.height = '0px';
             greyCircle.style.transform = 'translate(-50%, -50%) rotate(0deg)';
             resetButton.style.display = 'none';
         });
-</script>
+    </script>
 </body>
 </html>
