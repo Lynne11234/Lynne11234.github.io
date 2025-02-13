@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rotatable Circle</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: #bea288;
+        }
+        .container {
+            position: relative;
+            width: 500px;
+            height: 500px;
+        }
+        .grey-circle {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: grey;
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(0deg);
+            transition: transform 0.1s linear;
+        }
+        .blue-handle {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background: rgb(73, 57, 9);
+            border-radius: 50%;
+            top: 0;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            cursor: grab;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="grey-circle" id="greyCircle">
+            <img src="istockphoto-1702250974-612x612.jpg" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">
+            <div class="blue-handle" id="blueHandle"></div>
+        </div>
+    </div>
+
+    <script>
+        const greyCircle = document.getElementById('greyCircle');
+        const blueHandle = document.getElementById('blueHandle');
+
+        let isDragging = false;
+        let initialAngle = 0;
+        let currentRotation = 0;
+
+        blueHandle.addEventListener('mousedown', (event) => {
+            isDragging = true;
+            document.body.style.cursor = 'grabbing';
+
+            const rect = greyCircle.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+
+            const mouseX = event.clientX;
+            const mouseY = event.clientY;
+
+            initialAngle = Math.atan2(mouseY - centerY, mouseX - centerX) * (180 / Math.PI);
+            const rotationMatch = greyCircle.style.transform.match(/rotate\((.*)deg\)/);
+            currentRotation = rotationMatch ? parseFloat(rotationMatch[1]) : 0;
+        });
+
+        document.addEventListener('mouseup', () => {
+            isDragging = false;
+            document.body.style.cursor = 'default';
+        });
+
+        document.addEventListener('mousemove', (event) => {
+            if (!isDragging) return;
+
+            const rect = greyCircle.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+
+            const mouseX = event.clientX;
+            const mouseY = event.clientY;
+
+            const angle = Math.atan2(mouseY - centerY, mouseX - centerX) * (180 / Math.PI);
+            const deltaAngle = angle - initialAngle;
+
+            greyCircle.style.transform = `translate(-50%, -50%) rotate(${currentRotation + deltaAngle}deg)`;
+        });
+
+        window.addEventListener('mouseup', (event) => {
+            if (isDragging) {
+                const rect = greyCircle.getBoundingClientRect();
+                const centerX = rect.left + rect.width / 2;
+                const centerY = rect.top + rect.height / 2;
+
+                const mouseX = event.clientX;
+                const mouseY = event.clientY;
+
+                initialAngle = Math.atan2(mouseY - centerY, mouseX - centerX) * (180 / Math.PI);
+                const rotationMatch = greyCircle.style.transform.match(/rotate\((.*)deg\)/);
+                currentRotation = rotationMatch ? parseFloat(rotationMatch[1]) : 0;
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rotatable Circle</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100vh; /* Full screen height */
+            background: #bea288;
+            position: relative;
+        }
+        .container {
+            position: relative;
+            width: 500px;
+            height: 500px;
+            z-index: 1;
+        }
+        .grey-circle {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: grey;
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(0deg);
+            transition: transform 0.1s linear;
+            z-index: 2;
+        }
+        .grey-circle img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            pointer-events: none; /* Make the image unclickable */
+        }
+        .blue-handle {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background: rgb(73, 57, 9);
+            border-radius: 50%;
+            top: 0;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            cursor: grab;
+            z-index: 3;
+        }
+        .text {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            pointer-events: none;
+            z-index: 4;
+        }
+        .text span {
+            position: absolute;
+            transform-origin: center;
+        }
+        .text span:nth-child(1) { transform: rotate(0deg) translate(150px) rotate(0deg); }
+        .text span:nth-child(2) { transform: rotate(45deg) translate(150px) rotate(-45deg); }
+        .text span:nth-child(3) { transform: rotate(90deg) translate(150px) rotate(-90deg); }
+        .text span:nth-child(4) { transform: rotate(135deg) translate(150px) rotate(-135deg); }
+        .text span:nth-child(5) { transform: rotate(180deg) translate(150px) rotate(-180deg); }
+        .text span:nth-child(6) { transform: rotate(225deg) translate(150px) rotate(-225deg); }
+        .text span:nth-child(7) { transform: rotate(270deg) translate(150px) rotate(-270deg); }
+        .text span:nth-child(8) { transform: rotate(315deg) translate(150px) rotate(-315deg); }
+        .white-box {
+            width: 100%;
+            height: 0;
+            background: white;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            transition: height 0.1s linear;
+            z-index: 0;
+        }
+        .reset-button {
+            display: none;
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 10px 20px;
+            background-color: #ae4040;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            z-index: 5;
+        }
+        .pho-link {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 5;
+            color: rgb(255, 255, 255);
+            text-decoration: underline;
+            font-size: 12px; /* Smaller font size */
+        }
+        .pho-link:hover {
+            color: rgb(229, 95, 95);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="grey-circle" id="greyCircle">
+            <img src="istockphoto-1702250974-612x612.jpg" alt="Circle Image">
+            <div class="blue-handle" id="blueHandle"></div>
+            <div class="text">
+                <span>Text 1</span>
+                <span>Text 2</span>
+                <span>Text 3</span>
+                <span>Text 4</span>
+                <span>Text 5</span>
+                <span>Text 6</span>
+                <span>Text 7</span>
+                <span>Text 8</span>
+            </div>
+        </div>
+    </div>
+    <div class="white-box" id="whiteBox"></div>
+    <button class="reset-button" id="resetButton">Too much rice powder!!</button>
+    <a href="pho.html" class="pho-link">But hey, where is Pho?</a>
+
+    <script>
+        const greyCircle = document.getElementById('greyCircle');
+        const blueHandle = document.getElementById('blueHandle');
+        const whiteBox = document.getElementById('whiteBox');
+        const resetButton = document.getElementById('resetButton');
+
+        const MAX_HEIGHT = 400;
+        let isDragging = false;
+        let rotation = 0;
+        let initialAngle = 0;
+        let fullSpins = 0;
+
+        blueHandle.addEventListener('mousedown', (event) => {
+            isDragging = true;
+            document.body.style.cursor = 'grabbing';
+
+            const rect = greyCircle.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+
+            const mouseX = event.clientX;
+            const mouseY = event.clientY;
+            initialAngle = Math.atan2(mouseY - centerY, mouseX - centerX) * (180 / Math.PI);
+            initialAngle = Math.atan2(mouseY - centerY, mouseX - centerX) * (180 / Math.PI) - rotation;
+        });
+
+        document.addEventListener('mouseup', () => {
+            isDragging = false;
+            document.body.style.cursor = 'default';
+        });
+
+        document.addEventListener('mousemove', (event) => {
+            if (!isDragging) return;
+
+            const rect = greyCircle.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+
+            const mouseX = event.clientX;
+            const mouseY = event.clientY;
+
+            const angle = Math.atan2(mouseY - centerY, mouseX - centerX) * (180 / Math.PI);
+            const deltaAngle = angle - initialAngle;
+
+            rotation += deltaAngle;
+            initialAngle = angle;
+
+            requestAnimationFrame(() => {
+                greyCircle.style.transform = `translate(-50%, -50%) rotate(${rotation}deg)`;
+            });
+
+            // Calculate full spins
+            const spins = Math.floor(rotation / 360);
+            if (spins !== fullSpins) {
+                fullSpins = spins;
+                const height = Math.min(fullSpins * 20, MAX_HEIGHT); // Max height 400px for 20 full spins
+                whiteBox.style.height = `${height}px`;
+                // Log full spins and white box height (for debugging purposes)
+                // console.log('Full Spins:', fullSpins, 'White Box Height:', height);
+                console.log('Full Spins:', fullSpins, 'White Box Height:', height);
+                if (height >= MAX_HEIGHT) {
+                    resetButton.style.display = 'block';
+                }
+            }
+        });
+
+        resetButton.addEventListener('click', () => {
+            rotation = 0;
+            fullSpins = 0;
+            whiteBox.style.height = '0px';
+            greyCircle.style.transform = 'translate(-50%, -50%) rotate(0deg)';
+            resetButton.style.display = 'none';
+        });
+    </script>
+</body>
+</html>
