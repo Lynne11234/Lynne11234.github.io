@@ -49,66 +49,6 @@
             <div class="blue-handle" id="blueHandle"></div>
         </div>
     </div>
-
-    <script>
-        const greyCircle = document.getElementById('greyCircle');
-        const blueHandle = document.getElementById('blueHandle');
-
-        let isDragging = false;
-        let initialAngle = 0;
-        let currentRotation = 0;
-
-        blueHandle.addEventListener('mousedown', (event) => {
-            isDragging = true;
-            document.body.style.cursor = 'grabbing';
-
-            const rect = greyCircle.getBoundingClientRect();
-            const centerX = rect.left + rect.width / 2;
-            const centerY = rect.top + rect.height / 2;
-
-            const mouseX = event.clientX;
-            const mouseY = event.clientY;
-
-            initialAngle = Math.atan2(mouseY - centerY, mouseX - centerX) * (180 / Math.PI);
-            const rotationMatch = greyCircle.style.transform.match(/rotate\((.*)deg\)/);
-            currentRotation = rotationMatch ? parseFloat(rotationMatch[1]) : 0;
-        });
-
-        document.addEventListener('mouseup', () => {
-            isDragging = false;
-            document.body.style.cursor = 'default';
-        });
-
-        document.addEventListener('mousemove', (event) => {
-            if (!isDragging) return;
-
-            const rect = greyCircle.getBoundingClientRect();
-            const centerX = rect.left + rect.width / 2;
-            const centerY = rect.top + rect.height / 2;
-
-            const mouseX = event.clientX;
-            const mouseY = event.clientY;
-
-            const angle = Math.atan2(mouseY - centerY, mouseX - centerX) * (180 / Math.PI);
-            const deltaAngle = angle - initialAngle;
-
-            greyCircle.style.transform = `translate(-50%, -50%) rotate(${currentRotation + deltaAngle}deg)`;
-        });
-
-        window.addEventListener('mouseup', (event) => {
-            if (isDragging) {
-                const rect = greyCircle.getBoundingClientRect();
-                const centerX = rect.left + rect.width / 2;
-                const centerY = rect.top + rect.height / 2;
-
-                const mouseX = event.clientX;
-                const mouseY = event.clientY;
-
-                initialAngle = Math.atan2(mouseY - centerY, mouseX - centerX) * (180 / Math.PI);
-                const rotationMatch = greyCircle.style.transform.match(/rotate\((.*)deg\)/);
-                currentRotation = rotationMatch ? parseFloat(rotationMatch[1]) : 0;
-            }
-        });
-    </script>
+    <script src="rotate.js"></script>
 </body>
 </html>
