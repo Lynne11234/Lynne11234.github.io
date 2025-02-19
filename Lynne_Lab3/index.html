@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Lab 4</title>
+    <script src="p5.min.js"></script>
+    <style>
+      body {
+        margin: 0;
+      }
+      .gui-container {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        background: rgba(137, 130, 231, 0.8);
+        padding: 10px;
+        border-radius: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="gui-container">
+      <label for="size-slider">Size:</label>
+      <input type="range" id="size-slider" min="10" max="100" value="50" />
+      <br />
+      <label for="shape-select">Shape:</label>
+      <select id="shape-select">
+        <option value="circle">Circle</option>
+        <option value="square">Square</option>
+      </select>
+    </div>
+    <script>
+      let sizeSlider, shapeSelect;
+
+      function setup() {
+        createCanvas(windowWidth, windowHeight);
+
+        sizeSlider = select("#size-slider");
+        shapeSelect = select("#shape-select");
+      }
+
+      function draw() {
+        background(220);
+        let shapeSize = sizeSlider.value();
+        let currentShape = shapeSelect.value();
+
+        fill(150, 100, 255);
+        noStroke();
+
+        if (currentShape === "circle") {
+          ellipse(width / 2, height / 2, shapeSize);
+        } else if (currentShape === "square") {
+          rectMode(CENTER);
+          rect(width / 2, height / 2, shapeSize, shapeSize);
+        }
+      }
+    </script>
+  </body>
+</html>
