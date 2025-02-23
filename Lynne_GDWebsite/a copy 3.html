@@ -9,18 +9,43 @@
             margin: 0;
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: center; /* Changed back to center */
             align-items: center;
             width: 100%;
             height: 100vh; /* Full screen height */
             background: #bea288;
             position: relative;
         }
+        .blue-rectangle {
+            width: 100%;
+            height: 170px;
+            background: blue;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 6; /* Ensure it is on top */
+        }
+        .green-rectangle {
+            width: 200px;
+            height: 200px;
+            background: green;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 7; /* Ensure it is on top */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            padding: 20px;
+            box-sizing: border-box;
+        }
         .container {
             position: relative;
             width: 500px;
             height: 500px;
             z-index: 1;
+            margin-top: 215px; /* Add margin to push it below the blue rectangle */
         }
         .grey-circle {
             position: absolute;
@@ -130,28 +155,38 @@
             height: 250px;
             background: pink;
             border-radius: 50%;
-            top: 50%;
-            right: -180px; /* Half of the circle's width */
+            top: 60%;
+            right: -150px; /* Half of the circle's width */
             transform: translateY(-50%);
             z-index: 1;
         }
+        .pink-circle img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+        }
         @media (max-width: 600px) {
             .pink-circle {
-                top: -125px; /* Half of the circle's height */
+                top: -5px; /* Half of the circle's height */
                 left: 50%;
                 transform: translateX(-50%);
             } /*mobile view*/
+            .container {
+                margin-top: 40vh; /* Move 40% downwards relative to the screen height */
+            }
         }
     </style>
 </head>
 <body>
+    <div class="blue-rectangle"></div>
     <div class="container">
         <div class="grey-circle" id="greyCircle">
             <img src="phone.jpeg" alt="Circle Image">
             <div class="blue-handle" id="blueHandle"></div>
         </div>
         <div class="text">
-            <span>Bun Bo Hue</span>
+            <span>Text 1</span>
             <span>Text 2</span>
             <span>Text 3</span>
             <span>Text 4</span>
@@ -164,7 +199,9 @@
     <div class="white-box" id="whiteBox"></div>
     <button class="reset-button" id="resetButton">Too much numbers!!</button>
     <a href="pho.html" class="pho-link">But hey, where is Pho?</a>
-    <div class="pink-circle"></div>
+    <div class="pink-circle" id="pinkCircle">
+        <img src="" alt="Pink Circle Image" id="pinkCircleImage">
+    </div>
     <audio id="mouseHoldSound" src="mousehold.m4a"></audio>
     <audio id="mouseReleaseSound" src="mouserelease.m4a"></audio>
     <audio id="resetSound" src="reset.m4a"></audio>
@@ -175,9 +212,21 @@
         const mouseHoldSound = document.getElementById('mouseHoldSound');
         const mouseReleaseSound = document.getElementById('mouseReleaseSound');
         const resetSound = document.getElementById('resetSound');
+        const pinkCircleImage = document.getElementById('pinkCircleImage');
         resetSound.volume = 0.6; // Set volume to 60%
         const MAX_HEIGHT = 400; // Max height 400px for 5 full spins
         const HEIGHT_PER_SPIN = MAX_HEIGHT / 5; // 80px per spin
+
+        const images = [
+            'Recipe/BunRieu.jpeg', // Image for Text 1
+            'image2.jpg', // Image for Text 2
+            'image3.jpg', // Image for Text 3
+            'image4.jpg', // Image for Text 4
+            'image5.jpg', // Image for Text 5
+            'image6.jpg', // Image for Text 6
+            'image7.jpg', // Image for Text 7
+            'image8.jpg'  // Image for Text 8
+        ];
 
         let rotation = 0;
         let initialAngle = 0;
@@ -222,6 +271,10 @@
                         resetButton.style.display = 'block';
                     }
                 }
+
+                // Update pink circle image based on rotation
+                const index = (snappedRotation / 45) % 8;
+                pinkCircleImage.src = images[index];
             };
 
             const onMouseUp = () => {
@@ -243,6 +296,7 @@
             whiteBox.style.height = '0px';
             greyCircle.style.transform = 'translate(-50%, -50%) rotate(0deg)';
             resetButton.style.display = 'none';
+            pinkCircleImage.src = ''; // Clear the pink circle image
         });
     </script>
 </body>
