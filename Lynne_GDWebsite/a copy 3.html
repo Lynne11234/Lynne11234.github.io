@@ -19,26 +19,11 @@
         .blue-rectangle {
             width: 100%;
             height: 170px;
-            background: blue;
+            background: rgb(135, 117, 102);
             position: absolute;
             top: 0;
             left: 0;
             z-index: 6; /* Ensure it is on top */
-        }
-        .green-rectangle {
-            width: 200px;
-            height: 200px;
-            background: green;
-            position: absolute;
-            top: 0;
-            left: 0;
-            z-index: 7; /* Ensure it is on top */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            padding: 20px;
-            box-sizing: border-box;
         }
         .container {
             position: relative;
@@ -85,9 +70,13 @@
             width: 30px; /* 300px (circle diameter) + 60px (30px padding on each side) */
             height: 360px;
             color: rgb(255, 255, 255);
+            font-size: 12pt;
+            line-height: 23px;
+            font-family: 'Inter', sans-serif;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
+            text-decoration: none;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -151,12 +140,12 @@
         }
         .pink-circle {
             position: absolute;
-            width: 250px;
-            height: 250px;
+            width: 300px;
+            height: 300px;
             background: pink;
             border-radius: 50%;
             top: 60%;
-            right: -150px; /* Half of the circle's width */
+            right: 5%; /* Half of the circle's width */
             transform: translateY(-50%);
             z-index: 1;
         }
@@ -166,34 +155,69 @@
             border-radius: 50%;
             object-fit: cover;
         }
-        @media (max-width: 600px) {
+        .green-square {
+            position: absolute;
+            width: 400px;
+            height: 300px;
+            background: rgb(213, 193, 177);
+            left: 5%;
+            top: 50%;
+            transform: translateY(-20%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: rgb(49, 46, 46);
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .green-square p {
+            font-size: 10pt;
+            line-height: 25px;
+            font-family: 'Inter', sans-serif;
+        }
+        @media (max-width: 900px) {
             .pink-circle {
-                top: -5px; /* Half of the circle's height */
+                top: -25px; /* Half of the circle's height */
                 left: 50%;
                 transform: translateX(-50%);
             } /*mobile view*/
             .container {
                 margin-top: 40vh; /* Move 40% downwards relative to the screen height */
             }
+            .green-square {
+                top: 220px; 
+                left: 50%;
+                transform: translateX(-50%);
+            } 
+            .blue-rectangle {
+                top: -60px; 
+                left: 50%;
+                transform: translateX(-50%);
+            }
         }
     </style>
 </head>
 <body>
     <div class="blue-rectangle"></div>
+    <div class="green-square" id="greenSquare">
+        <p>Your text here</p>
+    </div>
+    <div class="text">
+    </div>
     <div class="container">
         <div class="grey-circle" id="greyCircle">
             <img src="phone.jpeg" alt="Circle Image">
             <div class="blue-handle" id="blueHandle"></div>
         </div>
         <div class="text">
-            <span>Text 1</span>
-            <span>Text 2</span>
-            <span>Text 3</span>
-            <span>Text 4</span>
-            <span>Text 5</span>
-            <span>Text 6</span>
-            <span>Text 7</span>
-            <span>Text 8</span>
+            <span><a href="link1.html" class="text">Text 1</a></span>
+            <span><a href="link2.html" class="text">Text 2</a></span>
+            <span><a href="link3.html" class="text">Text 3</a></span>
+            <span><a href="link4.html" class="text">Text 4</a></span>
+            <span><a href="link5.html" class="text">Text 5</a></span>
+            <span><a href="link6.html" class="text">Text 6</a></span>
+            <span><a href="link7.html" class="text">Text 7</a></span>
+            <span><a href="link8.html" class="text">Text 8</a></span>
         </div>
     </div>
     <div class="white-box" id="whiteBox"></div>
@@ -213,6 +237,7 @@
         const mouseReleaseSound = document.getElementById('mouseReleaseSound');
         const resetSound = document.getElementById('resetSound');
         const pinkCircleImage = document.getElementById('pinkCircleImage');
+        const greenSquare = document.getElementById('greenSquare');
         resetSound.volume = 0.6; // Set volume to 60%
         const MAX_HEIGHT = 400; // Max height 400px for 5 full spins
         const HEIGHT_PER_SPIN = MAX_HEIGHT / 5; // 80px per spin
@@ -226,6 +251,17 @@
             'image6.jpg', // Image for Text 6
             'image7.jpg', // Image for Text 7
             'image8.jpg'  // Image for Text 8
+        ];
+
+        const texts = [
+            'Bún riêu cua is a traditional Vietnamese dish, originating from the Red River Delta in Vietnam. This dish consists of noodles (either bun rối or bun lá) and riêu cua. Riêu cua is a sour soup made from crab roe, crab meat that is pounded and filtered, along with the fruit of the perilla plant, tomatoes, pork fat, fermented rice vinegar, fish sauce, salt, and green onions. This dish has a refreshing, tangy taste. Many street vendors in Vietnam sell bún riêu.',
+            'Paragraph for Text 2',
+            'Paragraph for Text 3',
+            'Paragraph for Text 4',
+            'Paragraph for Text 5',
+            'Paragraph for Text 6',
+            'Paragraph for Text 7',
+            'Paragraph for Text 8'
         ];
 
         let rotation = 0;
@@ -272,9 +308,10 @@
                     }
                 }
 
-                // Update pink circle image based on rotation
+                // Update pink circle image and green square text based on rotation
                 const index = (snappedRotation / 45) % 8;
                 pinkCircleImage.src = images[index];
+                greenSquare.querySelector('p').textContent = texts[index];
             };
 
             const onMouseUp = () => {
@@ -297,6 +334,7 @@
             greyCircle.style.transform = 'translate(-50%, -50%) rotate(0deg)';
             resetButton.style.display = 'none';
             pinkCircleImage.src = ''; // Clear the pink circle image
+            greenSquare.querySelector('p').textContent = 'Your text here'; // Reset the green square text
         });
     </script>
 </body>

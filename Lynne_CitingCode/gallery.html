@@ -1,0 +1,173 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+    * {
+      box-sizing: border-box;
+    }
+    
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+    h1 {
+      text-align: center;
+      color: rgb(204, 99, 116);
+    } /* making title pink ^^ */
+    .header {
+      text-align: center;
+      padding: 32px;
+    }
+    
+    .row {
+      display: flex;
+      display: flex;
+      flex-wrap: wrap;
+      padding: 0 4px;
+    }
+    
+    /* Create two equal columns that sits next to each other */
+    .column {
+      -ms-flex: 50%; /* IE 10 */
+      flex: 50%;
+      padding: 0 4px;
+    }
+    
+    .column img {
+      margin-top: 8px;
+      vertical-align: middle;
+    }
+    
+    .btn {
+      border: none;
+      outline: none;
+      padding: 10px 16px;
+      background-color: #f1f1f1;
+      cursor: pointer;
+      font-size: 18px;
+    }
+    
+    .btn:hover {
+      background-color: #ddd;
+    }  /* changing color when hover over ^^ */
+    
+    .btn.active {
+      background-color: #886161;
+      color: white; /* changing color when active ^^ */
+    }
+    img:hover {
+  animation: shake 0.5s;
+  animation-iteration-count: infinite;
+} /* responsive hover effect ^^ */
+
+@keyframes shake {
+  0% { transform: translate(1px, 1px) rotate(0deg); }
+  10% { transform: translate(-1px, -2px) rotate(-1deg); }
+  20% { transform: translate(-3px, 0px) rotate(1deg); }
+  30% { transform: translate(3px, 2px) rotate(0deg); }
+  40% { transform: translate(1px, -1px) rotate(1deg); }
+  50% { transform: translate(-1px, 2px) rotate(-1deg); }
+  60% { transform: translate(-3px, 1px) rotate(0deg); }
+  70% { transform: translate(3px, 1px) rotate(-1deg); }
+  80% { transform: translate(-1px, -1px) rotate(1deg); }
+  90% { transform: translate(1px, 2px) rotate(0deg); }
+  100% { transform: translate(1px, -2px) rotate(-1deg); }
+} /* making images shake when hovered over ^^ (https://www.w3schools.com/howto/howto_css_shake_image.asp) */
+</style>
+<script src="p5.min.js"></script> <!-- adding p5.js because i have nothing else to add -->
+    </head>
+<body>
+  <script src="sketch.js"></script> <!-- adding sketch.js so that the week 2 codes are not forgotten -->
+  <div class="header" id="myHeader">
+    <h1>Kirby gallery</h1>
+    <p>Click on the buttons to change the grid view.</p>
+    <button class="btn" onclick="one()">1</button>
+    <button class="btn active" onclick="two()">2</button>
+    <button class="btn" onclick="four()">4</button>
+  </div>
+  
+  <!-- Photo Grid -->
+  <div class="row"> 
+    <div class="column">
+      <img src="https://preview.redd.it/kirby-taking-a-relaxing-swim-v0-r3o9cjw1skxd1.png?width=640&crop=smart&auto=webp&s=08361703b16a56ede3d50cc2116efa8d3db50160"
+    style="width:100%">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYMnBacKuJIJh5FAtZP8V9ylfxyUHpO94Alf5n6rcjljYBQhmv3SWNyayODX2bjpqTuJ8&usqp=CAU"    style="width:100%">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkzuNavO_BgHJp5k1M7UsWfHP6edqgn29DoffH4ZPC2bqVAGmtuRtJFO2hhwAXGZ6B9i8&usqp=CAU" style="width:100%">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3yEAtj0WfITBZfu9fZdbLHP1GFuJn80NWyYbQ_GgFw76hs2TEQ4nbRoDTlkpvpwfRcMk&usqp=CAU"    style="width:100%">
+    <img src="https://i.etsystatic.com/18362266/r/il/21961a/3935107489/il_570xN.3935107489_38c6.jpg"    style="width:100%">
+    <img src="https://png.pngtree.com/png-vector/20230728/ourlarge/pngtree-kirby-clipart-kirby-2-vector-png-image_6802791.png"    style="width:100%">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrg3NTfhY6p6lDnA8G2oLl2YS0YYA0MhJYJ8RK7C6T2bd7AxKlRP0uLpWqYFQDJ0_St_Y&usqp=CAU"    style="width:100%">
+    </div>
+    <div class="column">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT3GlNYnH1V3ebZgx9mf5IRthx68Xz2s9CRVjeaVEPkSCkmrNrbKdB27Wkec5J3ezEzkc4&usqp=CAU"      style="width:100%">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTqUaY-wSMqOiF5z9euDOEcOntdGeYfjjjzf2fHgOhCR4ADZVRkzH0HVlAIuXJ6bYBXV94&usqp=CAU"      style="width:100%">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3XmxJ6bIQ-oaO9GDDnflLDj7_I4ToquAMslYL6bb1CKbFKkfAKYSw6KFERjz58aEdSL8&usqp=CAU"      style="width:100%">
+      <img src="https://cdn.donmai.us/sample/84/75/__kirby_kirby_drawn_by_hitofutarai__sample-84756f12667d5a42f26637277902413a.jpg"      style="width:100%">
+      <img src="https://cdn.donmai.us/sample/15/f4/__kirby_kirby_drawn_by_vul3hl0smteyk1z__sample-15f4bc5e59fb25c54acef09c825a357c.jpg"      style="width:100%">
+      <img src="https://cdn.donmai.us/sample/2b/6a/__kirby_kirby_drawn_by_miclot__sample-2b6a3c175eaf8199d9992834c9cdb0aa.jpg"      style="width:100%">
+    </div>  
+    <div class="column">
+      <img src="https://cdn.donmai.us/sample/dc/9e/__kirby_kirby_drawn_by_miclot__sample-dc9e210195d7546a2d07c0abdd4209ec.jpg"      style="width:100%">
+      <img src="https://cdn.donmai.us/original/73/da/73dafa7a562f71f2c97d6e7e153cce16.jpg"      style="width:100%">
+      <img src="https://s1.zerochan.net/Kirby.Series.600.3781515.jpg"     style="width:100%">
+      <img src="https://s1.zerochan.net/Kirby.Series.600.2640736.jpg"      style="width:100%">
+      <img src="https://i.pinimg.com/736x/ab/0e/bc/ab0ebc4edfe75a079d9a9e3890a3a056.jpg"      style="width:100%">
+      <img src="https://i.pinimg.com/736x/fa/39/d4/fa39d416afea6eb002b439afcb6023b5.jpg"      style="width:100%">
+      <img src="https://i.pinimg.com/736x/c8/aa/e7/c8aae7eaa06d438d3def65d2851813c5.jpg"      style="width:100%">
+    </div>
+    <div class="column">
+      <img src="https://i.pinimg.com/736x/72/45/3a/72453a52af397469dedfca8b8b24fc02.jpg" style="width:100%">
+      <img src="https://i.pinimg.com/originals/5f/67/fb/5f67fb10fd45fed169dd5a6d89eda2e6.png"      style="width:100%">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWXSM5JtHVpQZTxADHe1Z3HABMut2Oal2HPEAgB8iWtRCsRQRNYdzoq5SiAFbPbIT61c0&usqp=CAU"      style="width:100%">
+      <img src="https://i.etsystatic.com/5349080/r/il/f96e29/4175607012/il_570xN.4175607012_aicl.jpg"      style="width:100%">
+      <img src="https://i.pinimg.com/736x/b6/e8/d4/b6e8d4b687cb567333e4318ac6a7c7b7.jpg" style="width:100%">
+      <img src="https://i.etsystatic.com/29261870/r/il/0d16a2/5852495053/il_1080xN.5852495053_imi1.jpg"      style="width:100%">
+    </div>
+  </div>
+  <script>
+  // Get the elements with class="column"
+  var elements = document.getElementsByClassName("column");
+  
+  // Declare a loop variable
+  var i;
+  
+  // Full-width images
+  function one() {
+      for (i = 0; i < elements.length; i++) {
+      elements[i].style.msFlex = "100%";  // IE10
+      elements[i].style.flex = "100%";
+    }
+  }
+  
+  // Two images side by side
+  function two() {
+    for (i = 0; i < elements.length; i++) {
+      elements[i].style.msFlex = "50%";  // IE10
+      elements[i].style.flex = "50%";
+    }
+  }
+  
+  // Four images side by side
+  function four() {
+    for (i = 0; i < elements.length; i++) {
+      elements[i].style.msFlex = "25%";  // IE10
+      elements[i].style.flex = "25%";
+    }
+  }
+  
+  // Add active class to the current button (highlight it)
+  var header = document.getElementById("myHeader");
+  var btns = header.getElementsByClassName("btn");
+  for (var i = 0; i < btns.length; i++) {
+    btns[i].addEventListener("click", function() {
+      var current = document.getElementsByClassName("active");
+      current[0].className = current[0].className.replace(" active", "");
+      this.className += " active";
+    });
+  }
+  </script>
+  <!-- sorry for not giving credits to the images, i tried href function when images are clicked but it doesnt work -->
+  </body>
+  </html>
